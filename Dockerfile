@@ -6,6 +6,6 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 RUN echo $VERSION > version.txt
 RUN --mount=type=secret,id=mysecret \
-  echo $(cat /run/secrets/mysecret) > secret.txt
+  cp /run/secrets/mysecret secret.txt
 COPY . .
 CMD ["ruby", "server.rb"]
